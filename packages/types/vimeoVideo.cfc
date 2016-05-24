@@ -2,7 +2,7 @@ component extends = "farcry.core.packages.types.types" displayname = "Video" hin
 	
 	property ftSeq = 110 ftFieldset = "Details" ftLabel = "Title" name = "title" type = "nstring" ftType = "string" required = true bLabel = true;
 	property ftSeq = 120 ftFieldset = "Details" ftLabel = "Teaser" name = "teaser" type = "longchar" ftType = "longchar" required = false;
-	property ftSeq = 130 ftFieldset = "Details" ftLabel = "Duration" name = "duration" type = "nstring" ftType = "nstring" required = false;
+	property ftSeq = 130 ftFieldset = "Details" ftLabel = "Duration" name = "duration" type = "nstring" ftType = "string" required = false;
 	
 	property ftSeq = 210 ftFieldset = "API Metadata" ftLabel = "ID" name = "id" type = "nstring" ftType = "string" default = "" ftDefault = "" required = false;
 	property ftSeq = 220 ftFieldset = "API Metadata" ftLabel = "Link" name = "link" type = "nstring" ftType = "url" default = "" ftDefault = "" required = false;
@@ -24,10 +24,14 @@ component extends = "farcry.core.packages.types.types" displayname = "Video" hin
 		var st = beforeSave(arguments.stobj, {});
 		
 		if (structKeyExists(st, "objectid")) {
-			return setData(st);
+			var result = setData(st);
+			application.fc.factory.farFU.setSystemFU(objectid=st.objectid,typeName="vimeoVideo");
+			return result;
 		} else {
 			var saveResult = createData(st);
-			return afterSave(getData(saveResult.objectid));
+			var result = afterSave(getData(saveResult.objectid));
+			application.fc.factory.farFU.setSystemFU(objectid=saveResult.objectid,typeName="vimeoVideo");
+			return result;
 		}
 		
 	}
