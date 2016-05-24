@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<webtop>
+	<section mergeType="merge" id="content">
+    	<subsection id="vimeoVideoSubsection" sequence="99" label="Vimeo Videos">
+			<menu mergeType="merge" id="vimeoVideoMenu" label="Vimeo Videos">
+				<menuitem sequence="10" id="vimeoVideoMenuItem" label="Videos" typename="vimeoVideo" bodyview="webtopBody" />
+				<menuitem sequence="20" id="vimeoVideoSyncMenuItem" label="Sync" typename="vimeoVideo" bodyview="webtopBodySync" />
+			</menu>
+		</subsection>
+	</section>
+</webtop>
