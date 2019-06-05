@@ -9,7 +9,9 @@
 ownvideos = application.fc.lib.vimeo.getOwnVideos(getall = true);
 o = application.fapi.getContentType("vimeoVideo");
 for (video in ownvideos) {
-	o.saveFromAPI(video);
+	if (video.status eq "available") {
+		o.saveFromAPI(video);
+	}
 }
 </cfscript>
 
