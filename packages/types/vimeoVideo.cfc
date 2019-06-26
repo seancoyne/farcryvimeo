@@ -44,13 +44,16 @@ component extends = "farcry.core.packages.types.types" displayname = "Video" hin
 		// find matching records
 		var q = application.fapi.getContentObjects(typename = "vimeoVideo", lProperties = "objectid", id_eq = id, orderby = "datetimecreated desc");
 		
+		var stNew = populate(arguments.video);
+		
 		// if found, return the first match
 		if (q.recordcount) {
-			return getData(q.objectid[1]);
+			var stExisting = getData(q.objectid[1]);
+			structAppend(stExisting, stNew, true);
+			return stExisting;
 		}
 		
-		// we didn't find it, return a populated video
-		return populate(arguments.video);
+		return stNew;
 		
 	}
 	
